@@ -1,13 +1,70 @@
-// Задача 2. Доставка товару
-// Оголоси функцію getShippingMessage, яка очікує три параметри, значення яких будуть задаватися під час її виклику: • country — перший параметр, рядок, що містить країну доставки • price — другий параметр, число, що містить загальну вартість товару • deliveryFee — третій параметр, число, що містить вартість доставки товару
+// Задача 2. Користувачі з другом
+// Напиши стрілочну функцію getUsersWithFriend(users, friendName), яка прийматиме два параметра:
+// перший параметр users — масив об’єктів користувачів
+// другий параметр friendName — ім’я друга для пошуку.
 
-// Доповни код функції так, щоб вона повертала рядок з повідомленням про доставку товару в країну користувача: "Shipping to <country> will cost <totalPrice> credits", де: • <country> — це країни доставки • <totalPrice> — це загальна вартість замовлення, що включає вартість товару і його доставки.
+// Функція має повертати масив усіх користувачів із масиву users, у яких є друг з іменем friendName. Друзі кожного користувача зберігаються у властивості friends. Якщо користувачів, у яких є такий друг немає, то функція має повернути порожній масив.
 
-function getShippingMessage(country, price, deliveryFee) {
-  const totalPrice = price + deliveryFee;
-  return `Shipping to ${country} will cost ${totalPrice} credits`;
-}
+// Поради:
+// Метод filter() можна використовувати для створення нового масиву з елементами, які задовольняють певну умову.
+// Використовуй метод includes() для перевірки, чи масив friends містить friendName.
 
-console.log(getShippingMessage('Australia', 120, 50)); // "Shipping to Australia will cost 170 credits"
-console.log(getShippingMessage('Germany', 80, 20)); // "Shipping to Germany will cost 100 credits"
-console.log(getShippingMessage('Sweden', 100, 20)); // "Shipping to Sweden will cost 120 credits"
+const getUsersWithFriend = (users, friendName) =>
+  users.filter(user => user.friends.includes(friendName));
+
+const allUsers = [
+  {
+    name: 'Moore Hensley',
+    friends: ['Sharron Pace'],
+  },
+  {
+    name: 'Sharlene Bush',
+    friends: ['Briana Decker', 'Sharron Pace'],
+  },
+  {
+    name: 'Ross Vazquez',
+    friends: ['Marilyn Mcintosh', 'Padilla Garrison', 'Naomi Buckner'],
+  },
+  {
+    name: 'Elma Head',
+    friends: ['Goldie Gentry', 'Aisha Tran'],
+  },
+  {
+    name: 'Carey Barr',
+    friends: ['Jordan Sampson', 'Eddie Strong'],
+  },
+  {
+    name: 'Blackburn Dotson',
+    friends: ['Jacklyn Lucas', 'Linda Chapman'],
+  },
+  {
+    name: 'Sheree Anthony',
+    friends: ['Goldie Gentry', 'Briana Decker'],
+  },
+];
+
+console.log(getUsersWithFriend(allUsers, 'Briana Decker'));
+// [
+//   {
+//     name: "Sharlene Bush",
+//     friends: ["Briana Decker", "Sharron Pace"]
+//   },
+//   {
+//     name: "Sheree Anthony",
+//     friends: ["Goldie Gentry", "Briana Decker"]
+//   }
+// ]
+
+console.log(getUsersWithFriend(allUsers, 'Goldie Gentry'));
+// [
+//   {
+//     name: "Elma Head",
+//     friends: ["Goldie Gentry", "Aisha Tran"]
+//   },
+//   {
+//     name: "Sheree Anthony",
+//     friends: ["Goldie Gentry", "Briana Decker"]
+//   }
+// ]
+
+console.log(getUsersWithFriend(allUsers, 'Adrian Cross')); // []
